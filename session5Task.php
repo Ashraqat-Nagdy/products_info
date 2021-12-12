@@ -3,6 +3,7 @@
      $dataArray = json_decode($jsonData,true);
      //print_r($dataArray);
      echo '<h1> Products </h1>';
+     $file =  fopen("product1.txt","a")  or die("Can't open File");
       foreach ($dataArray['data'] as $key => $value) {  
        $x = array ($value['products_id']);
          foreach ($x as $value1) {
@@ -10,19 +11,23 @@
              //echo $value1 . '</br>';
 
 
-             echo '<p> product</p>'.
-             'product ID  >'. $value1 . ' <br>'.
-             'Product Name  >   '. $value['products_name'] . '<br> '.
-               'Products Quantity  > '. $value['products_quantity'] .'<br>' .
-               'products Model  > '. $value['products_model']. '<br>'.
-               'product Image >  '. $value['products_image'].'<br>'.
-               'product Data  > '. $value['products_date_added'].'<br>'.
-               'Products Liked > '. $value['products_liked'] .'<br>'.
-               'Product Description > '. $value['products_description'] .'<br>'
+             $text= '<p> product</p>'.
+             'product ID  >'. $value1 . ' \n'.
+             'Product Name  >   '. $value['products_name'] . '\n '.
+               'Products Quantity  > '. $value['products_quantity'] .'\n' .
+               'products Model  > '. $value['products_model']. '\n'.
+               'product Image >  '. $value['products_image'].'\n'.
+               'product Data  > '. $value['products_date_added'].'\n'.
+               'Products Liked > '. $value['products_liked'] .'\n'.
+               'Product Description > '. $value['products_description'] .'\n'
                ;
+
+               fwrite($file,$text);
+
                
             }
         }
+  fclose($file);
 
 
        
